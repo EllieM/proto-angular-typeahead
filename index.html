@@ -13,10 +13,10 @@
               <input id="txt_search"
                      type="text" 
                      ng-model="currentSuggestion" 
-                     typeahead-min-length = "1"
+                     typeahead-min-length = "2"
                      typeahead-on-select='onSelect($item)'
                      typeahead-editable="false"
-                     typeahead="country as country for country in suggestions | filter:$viewValue | limitTo:8" 
+                     typeahead="address for address in getSuggestions($viewValue)" 
                      class="form-control" style="width: 500px;">    
 
               <input type="submit" value="Search" class="btn btn-primary"/>
@@ -24,9 +24,11 @@
         </form>
 
 
-        <div ng-repeat='c in countriesResult | filter:userInput' class="list-group" style="margin-top: 10px;">
+        <div ng-repeat='c in countriesResult' class="list-group" style="margin-top: 10px;">
           <a href="#" class="list-group-item">
-                Country: {{c.Name}} ({{c.Symbol}})
+                Title: {{c.Title}} 
+                <br/>
+                Url: {{c.DownloadUrl}}
           </a>     
         </div>       
 
@@ -36,6 +38,10 @@
     <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.js"></script>   
     <script src="js/example.js"></script>
 
+    <script>
+      var _x = null;
+    </script>
+    
     <style>
       a.list-group-item {
         padding: 15px;     
